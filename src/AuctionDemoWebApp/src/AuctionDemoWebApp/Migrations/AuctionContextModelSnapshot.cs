@@ -89,8 +89,6 @@ namespace AuctionDemoWebApp.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<double>("CurrentPrice");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("UserName");

@@ -29,7 +29,7 @@
             <tr ng-repeat="bid in vm.bids">
                 <td>{{ bid.userName }}</td>
                 <td>{{ bid.price }}</td>
-                <td>{{ bid.created | date }}</td>
+                <td>{{ bid.created | date:'medium' }}</td>
             </tr>
         </table>
 

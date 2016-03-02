@@ -22,15 +22,9 @@ namespace AuctionDemoWebApp.Services
 
             var result = new CalculationResult
             {
-                Success = false,
-                NewPrice = 0
+                Success = true,
+                NewPrice = currentPrice + 10
             };
-
-            if (currentPrice > 0)
-            {
-                result.Success = true;
-                result.NewPrice = currentPrice + 10;
-            }
 
             return result;
         }

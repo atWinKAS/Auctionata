@@ -19,10 +19,16 @@
         vm.addBid = function () {
             vm.isBusy = true;
 
+            vm.newBid.price = vm.currentPrice;
+
             $http.post(url, vm.newBid)
                 .then(function(response) {
                     vm.bids.push(response.data);
                     vm.newBid = {};
+
+                    updateCurrentPrice();
+
+
                 }, function (error) {
                     vm.errorMessage = "Unable to add new details. " + error;
 
@@ -36,7 +42,9 @@
         $http.get(url)
             .then(function(response) {
                 angular.copy(response.data, vm.bids);
-                
+                vm.currentPrice = 0;
+
+                updateCurrentPrice();
 
             }, function() {
                 vm.errorMessage = "Failed to load details";
@@ -45,18 +53,29 @@
                 vm.isBusy = false;
             });
 
-       
+        function updateCurrentPrice() {
+            $http.get("/api/items/" + $routeParams.itemName)
+                .then(function (response) {
+                    vm.currentPrice = response.data.currentPrice;
+                }, function (error) {
+
+                });
+        }
+
         var chat = $.connection.communicationHub;
-        //$.connection.hub.logging = true;
-
-        //chat.client.broadcastMessage = function (name, message) {
-        //    console.log("Communication: " + name + "-" + message);
-        //};
-
+        
         chat.client.priceChanged = function (updItemName, newPrice) {
             if (updItemName == vm.itemName) {
                 vm.currentPrice = newPrice;
                 $scope.$apply();
+
+                $http.get(url)
+                    .then(function(response) {
+                        angular.copy(response.data, vm.bids);
+                    }, function(error) {
+                        
+                    });
+
             }
         }
 

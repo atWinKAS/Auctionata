@@ -23,15 +23,23 @@ namespace AuctionDemoWebApp.Models
             {
                 //// Adding new user
 
-                var user = new AuctionUser()
+                var user1 = new AuctionUser()
                 {
                     UserName = "jd",
                     Email = "john@mail.com",
 
                 };
 
-                await this.userManager.CreateAsync(user, "P@ssw0rd");
+                await this.userManager.CreateAsync(user1, "P@ssw0rd");
 
+                var user2 = new AuctionUser()
+                {
+                    UserName = "dj",
+                    Email = "jane@mail.com",
+
+                };
+
+                await this.userManager.CreateAsync(user2, "P@ssw0rd");
             }
 
             if (!this.context.Items.Any())
@@ -42,7 +50,6 @@ namespace AuctionDemoWebApp.Models
                     Name = "Car",
                     Created = DateTime.UtcNow,
                     UserName = "jd",
-                    CurrentPrice = 100.0,
                     Bids = new List<Bid>
                     {
                         new Bid

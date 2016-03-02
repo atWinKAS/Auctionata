@@ -65,33 +65,22 @@ namespace AuctionDemoWebApp.Models
         public void AddBid(string itemName, Bid newBid)
         {
             var theItem = this.GetItemByName(itemName);
-            newBid.Price = theItem.CurrentPrice;
-
+            
             theItem.Bids.Add(newBid);
 
             this.context.Bids.Add(newBid);
         }
 
-        public IEnumerable<Item> GetUserItemsWithBids(string userName)
+        public IEnumerable<Item> GetItemsWithBids()
         {
             try
             {
-                return this.context.Items.Include(t => t.Bids).OrderBy(t => t.Name).Where(t => t.UserName.Equals(userName)).ToList();
+                return this.context.Items.Include(t => t.Bids).OrderBy(t => t.Name).ToList();
             }
             catch (Exception ex)
             {
                 this.logger.LogError("Unable to get items with bids", ex);
                 return null;
-            }
-
-        }
-
-        public void UpdateItem(Item item)
-        {
-            var currentItem = this.context.Items.FirstOrDefault(f => f.Id == item.Id);
-            if (currentItem != null)
-            {
-                currentItem.CurrentPrice = item.CurrentPrice;
             }
         }
     }

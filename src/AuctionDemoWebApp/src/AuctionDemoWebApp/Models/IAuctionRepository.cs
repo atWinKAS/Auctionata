@@ -16,7 +16,6 @@ namespace AuctionDemoWebApp.Models
 
         void AddBid(string itemName, Bid newBid);
 
-        IEnumerable<Item> GetUserItemsWithBids(string userName);
-        void UpdateItem(Item item);
+        IEnumerable<Item> GetItemsWithBids();
     }
 }

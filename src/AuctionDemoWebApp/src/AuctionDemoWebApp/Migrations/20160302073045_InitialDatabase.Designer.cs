@@ -8,7 +8,7 @@ using AuctionDemoWebApp.Models;
 namespace AuctionDemoWebApp.Migrations
 {
     [DbContext(typeof(AuctionContext))]
-    [Migration("20160302002313_InitialDatabase")]
+    [Migration("20160302073045_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,8 +89,6 @@ namespace AuctionDemoWebApp.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Created");
-
-                    b.Property<double>("CurrentPrice");
 
                     b.Property<string>("Name");
 

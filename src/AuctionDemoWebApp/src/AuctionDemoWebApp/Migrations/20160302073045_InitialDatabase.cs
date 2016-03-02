@@ -41,7 +41,6 @@ namespace AuctionDemoWebApp.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Created = table.Column<DateTime>(nullable: false),
-                    CurrentPrice = table.Column<double>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true)
                 },

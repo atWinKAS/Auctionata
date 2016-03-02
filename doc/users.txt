@@ -2,3 +2,8 @@
 user name: jd
 email: john@mail.com
 password: P@ssw0rd
+
+2. Jane Doe
+user name: dj
+email: jane@mail.com
+password: P@ssw0rd

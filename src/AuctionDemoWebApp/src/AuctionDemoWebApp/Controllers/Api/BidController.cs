@@ -45,7 +45,7 @@ namespace AuctionDemoWebApp.Controllers.Api
                     return Json(null);
                 }
 
-                return Json(Mapper.Map<IEnumerable<BidViewModel>>(result.Bids.OrderBy(s => s.Created)));
+                return Json(Mapper.Map<IEnumerable<BidViewModel>>(result.Bids.OrderByDescending(s => s.Created)));
 
             }
             catch (Exception ex)
@@ -73,16 +73,21 @@ namespace AuctionDemoWebApp.Controllers.Api
                     if (this.repository.SaveAll())
                     {
                         var item = this.repository.GetItemByName(itemName);
-                        var calcResult = this.calculationService.Calculate(item.CurrentPrice);
+                        double currentPrice = 0;
+                        if (item.Bids.Any())
+                        {
+                            var latestBib = item.Bids.OrderByDescending(b => b.Created).FirstOrDefault();
+                            if (latestBib != null)
+                            {
+                                currentPrice = latestBib.Price;
+                            }
+                        }
+
+                        var calcResult = this.calculationService.Calculate(currentPrice);
                         if (calcResult.Success)
                         {
-                            item.CurrentPrice = calcResult.NewPrice;
-
-                            this.repository.UpdateItem(item);
-                            if (this.repository.SaveAll())
-                            {
-                                this.NotifyOthers(item.Name, item.CurrentPrice);
-                            }
+                            this.NotifyOthers(item.Name, calcResult.NewPrice);
+                            
                         }
 
                         Response.StatusCode = (int) HttpStatusCode.Created;

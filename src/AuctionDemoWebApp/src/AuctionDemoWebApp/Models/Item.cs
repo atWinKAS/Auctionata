@@ -15,8 +15,6 @@ namespace AuctionDemoWebApp.Models
 
         public string UserName { get; set; }
 
-        public double CurrentPrice { get; set; }
-
         public ICollection<Bid> Bids { get; set; } 
     }
 }

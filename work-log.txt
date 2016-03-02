@@ -1,3 +1,8 @@
+2016-03-02 
+Updating Bidding routine 2h
+
+FIRST RELEASE 
+
 2016-03-02
 Implementing UI client 2h
 
