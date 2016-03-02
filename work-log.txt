@@ -1,5 +1,7 @@
+
 2016-03-02 
 Updating Bidding routine 2h
+Added item details and some source code cleanup 2h
 
 FIRST RELEASE 
 
