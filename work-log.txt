@@ -1,0 +1,10 @@
+2016-03-02
+Implementing UI client 2h
+
+2016-03-01
+Implementing API for items and bids 3h
+
+2016-02-29
+Created and published init solution 2h
+Prepared production hosting server (Azure web site) 1h
+

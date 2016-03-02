@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/lib/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="~/lib/signalr/jquery.signalR.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript" src="~/js/simpleControls.js"></script>
+    <script type="text/javascript" src="~/js/app-items.js"></script>
+    <script type="text/javascript" src="~/js/itemsController.js"></script>
+    <script type="text/javascript" src="~/js/itemEditorController.js"></script>
+    
+
+}
+
+<div class="row" ng-app="app-items">
+
+    <div ng-view></div>
+    
+</div>

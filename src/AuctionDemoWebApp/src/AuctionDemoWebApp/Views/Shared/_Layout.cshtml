@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Auction Demo Application - @ViewBag.Title</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootswatch/yeti/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+<div id="sidebar">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <img src="~/img/user1.jpg" alt="headshot" class="headshot" />
+        <span id="username" class="username">@User.Identity.Name</span>
+    }
+    
+    <ul class="nav">
+        <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
+        <li><a asp-controller="App" asp-action="About">About</a></li>
+        <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a asp-controller="App" asp-action="Items">Items</a></li>
+            <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+
+        }
+        
+    </ul>
+
+</div>
+<div id="wrapper">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <button id="sidebarToggle" class="btn btn-primary btn-sm">
+                        <i class="fa fa-angle-left"></i>
+                    </button>
+                </li>
+            </ul>
+
+            <a asp-controller="App" asp-action="Index" class="navbar-brand">Demo Application</a>
+
+        </div>
+    </nav>
+
+
+    <div id="main" class="container-fluid">
+
+        <div>
+            @RenderBody()
+        </div>
+
+    </div>
+</div>
+
+<div id="footer" class="container-fluid">
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <h4 class="text-info text-center">&copy; Andrii</h4>
+    </div>
+</div>
+
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

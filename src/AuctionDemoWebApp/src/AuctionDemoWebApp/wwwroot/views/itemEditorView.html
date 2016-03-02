@@ -1,0 +1,41 @@
+﻿<div>
+    <div>
+        <a href="#/" class="btn btn-sm btn-default"><i class="fa fa-angle-left"></i> Back</a>
+    </div>
+    <div class="col-md-6">
+
+        <h2>{{ vm.itemName }}</h2>
+
+        <wait-cursor display-when="vm.isBusy"></wait-cursor>
+        <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+
+        <form novalidate="" name="newBidForm" ng-submit="vm.addBid()">
+            <div>
+                <input type="submit" value="Bid" class="btn btn-success"/>
+            </div>
+        </form>
+
+        
+        <div>
+            <h2>Price: {{ vm.currentPrice }}</h2>
+        </div>
+
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Username</th>
+                <th>Price</th>
+                <th>Created</th>
+            </tr>
+            <tr ng-repeat="bid in vm.bids">
+                <td>{{ bid.userName }}</td>
+                <td>{{ bid.price }}</td>
+                <td>{{ bid.created | date }}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="col-md-6">
+        <h2>Image</h2>
+    </div>
+</div>

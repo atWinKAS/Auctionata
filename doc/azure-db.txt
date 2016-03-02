@@ -1,0 +1,4 @@
+su
+POIq1w2e3r4
+
+audemodb.database.windows.net

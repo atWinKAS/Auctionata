@@ -1,0 +1,17 @@
+dnvm 
+dnvm list
+
+C:\Users\Andrii\.dnx\runtimes
+
+dnvm upgrade
+dnvm use ...
+
+dnx --version
+
+
+npm install yo -g
+npm install generator-aspnet -g
+
+yo
+
+yo aspnet

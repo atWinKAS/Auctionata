@@ -1,0 +1,49 @@
+﻿body {
+}
+
+.headshot {
+    width: 50px;
+}
+
+
+.menu {
+    font-size: 12px;
+}
+
+.menu li {
+    list-style-type: none;
+}
+
+
+.menu li.active{
+    font-weight: bold;
+}
+
+#sidebar {
+    background-color: #ddd;
+    color: #eee;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    overflow: hidden;
+    left: 0;
+    margin: 0;
+}
+
+#wrapper {
+    margin: 0 0 0 250px;
+}
+
+#sidebar.hide-sidebar {
+    left: -250px;
+
+}
+
+#wrapper.hide-sidebar {
+    margin-left: 0;
+}
+
+#username {
+    font-size: 14px;
+    color: #000
+}

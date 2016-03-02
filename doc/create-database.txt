@@ -1,0 +1,2 @@
+dnx ef migrations add InitialDatabase
+dnx ef migrations add IdentityEntities

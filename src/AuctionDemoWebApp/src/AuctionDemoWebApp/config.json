@@ -1,0 +1,8 @@
+﻿{
+  "AppSettings": {
+    "SiteEmailAddress": "site@mail.com"
+  },
+  "Data": {
+    "AuctionContextConnection": "Data Source=WINKAS-ANDRII\\SQLEXPRESS;Initial Catalog=AuctionDb;Persist Security Info=True;User ID=sa;Password=saroot;MultipleActiveResultSets=True"
+  }
+}

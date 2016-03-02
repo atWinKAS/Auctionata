@@ -1,0 +1,11 @@
+GET http://localhost:5001/api/trips HTTP/1.1
+Host: localhost:5001
+Connection: keep-alive
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36
+Postman-Token: d5c17dd1-1bca-669b-5aa8-a9385f01baf7
+Accept: */*
+Accept-Encoding: gzip, deflate, sdch
+Accept-Language: en,da;q=0.8,ru;q=0.6,en-US;q=0.4,uk;q=0.2
+Cookie: .AspNet.Microsoft.AspNet.Identity.Application=CfDJ8ETX8hXT-FpBqUTHYwrcH6arCV-Rqd4eLKqqSFG9cFFUSImAoOF3AKlkKXXtxzHv6Ap9Tn13uoHDKyzBuee7w-Re4JBBgopbffsOUsf4q69x7b43pP0uKxDXHyO7IRLOwCcKistErR-YHgZRO1_6_viXXgWzoPeCgAdwbc9I6eP0Ep61PlMml_KxXyG8tZT3qf6dCmdo2Ycm6fgkWIpXLM_CCe5GAUImvsP_9lBCy-7tcbtMn9ssox88yO7awbGZzv8auZIuDm_Ie3Ps_eJMK4CmrKVXvrO7MmMq1Da7q7erDMhReEgH4t7ygrfyEwzth2rfL6FhVP8kbP2r-bsYROuS_NHP5cZiOFUxduBqQNFtK67vQiAfnTsXvpgJxKJScjetfldIj-gjEBi48oJdtX-0zg5gxDFLgMh81PVbxyeioGx0MSvoJ-rB-dV4KewgrxfI27RbANz61e3XTWsqcasADbC6MxL2POQ5SZTDNdFvCYs7i-9ZpnBGH4-Ofkb80bWlW_3UfRc0iT3fBQanm4makh0IpYGju4zLrjzLuvWHkxR7Hy9mUEbtjz2iKE66QO_st9JFRNq2J9uS9M_YMlg6X_ESYa51bTfJNAa9nsryZkb6bl0gYNBAh3k7_UcHwKCHIaVN_ckKNQk4pr124f0
+
