@@ -48,6 +48,8 @@ namespace AuctionDemoWebApp.Models
                 var item = new Item
                 {
                     Name = "Car",
+                    Description = "AUDI PNG car image",
+                    Picture = "http://pngimg.com/upload/audi_PNG1739.png",
                     Created = DateTime.UtcNow,
                     UserName = "jd",
                     Bids = new List<Bid>

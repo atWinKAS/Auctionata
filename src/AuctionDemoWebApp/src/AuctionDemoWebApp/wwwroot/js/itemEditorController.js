@@ -26,7 +26,7 @@
                     vm.bids.push(response.data);
                     vm.newBid = {};
 
-                    updateCurrentPrice();
+                    updateCurrentItem();
 
 
                 }, function (error) {
@@ -44,7 +44,7 @@
                 angular.copy(response.data, vm.bids);
                 vm.currentPrice = 0;
 
-                updateCurrentPrice();
+                updateCurrentItem();
 
             }, function() {
                 vm.errorMessage = "Failed to load details";
@@ -53,9 +53,10 @@
                 vm.isBusy = false;
             });
 
-        function updateCurrentPrice() {
+        function updateCurrentItem() {
             $http.get("/api/items/" + $routeParams.itemName)
                 .then(function (response) {
+                    vm.currentItem = response.data;
                     vm.currentPrice = response.data.currentPrice;
                 }, function (error) {
 

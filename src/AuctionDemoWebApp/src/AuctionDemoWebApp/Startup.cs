@@ -26,7 +26,7 @@ namespace AuctionDemoWebApp
 {
     public class Startup
     {
-        public static IConfigurationRoot Configuration; 
+        public static IConfigurationRoot Configuration;
 
         public Startup(IApplicationEnvironment env)
         {

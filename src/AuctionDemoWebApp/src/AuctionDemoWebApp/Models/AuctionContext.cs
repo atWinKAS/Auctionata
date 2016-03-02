@@ -22,6 +22,7 @@ namespace AuctionDemoWebApp.Models
             //// change database connection string for production and developemnt database 
             
             var connString = Startup.Configuration["Data:AuctionContextConnection"];
+
             optionsBuilder.UseSqlServer(connString);
             base.OnConfiguring(optionsBuilder);
         }
