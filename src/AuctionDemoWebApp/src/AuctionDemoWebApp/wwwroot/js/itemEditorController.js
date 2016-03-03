@@ -6,6 +6,8 @@
         var vm = this;
 
         vm.errorMessage = "";
+        vm.infoMessage = "";
+        vm.serverMessage = "";
         vm.isBusy = true;
 
 
@@ -17,6 +19,7 @@
 
         var url = "/api/items/" + vm.itemName + "/bids";
 
+        
         vm.addBid = function () {
             vm.isBusy = true;
             vm.errorMessage = "";
@@ -75,20 +78,34 @@
                 });
         }
 
-        notificationService.chat.client.priceChanged = function (updItemName, newPrice) {
-            console.log("priceChanged event...");
-            //if (updItemName == vm.itemName) {
-            //    vm.currentPrice = newPrice;
-            //    $scope.$apply();
+        notificationService.chat.client.priceChanged = function (userName, itemName, newPrice) {
+            vm.serverMessage = "priceChanged event... Item: " + itemName + ", Price: " + newPrice + " (by " + userName + ")";
+            $scope.$apply();
+        }
 
-            //    $http.get(url)
-            //        .then(function (response) {
-            //            angular.copy(response.data, vm.bids);
-            //        }, function (error) {
-            //            vm.errorMessage = "Error while getting item status.";
-            //        });
+        vm.tryBid = function () {
+            vm.infoMessage = "";
+            var b = {
+                ItemName: vm.itemName,
+                ClientPrice: vm.currentPrice
+            };
+            //console.log("tryig to bid item: " + JSON.stringify(b));
 
-            //}
+            $http.post("/api/items/" + vm.itemName + "/try", b)
+                .then(function (response) {
+
+                    //console.log(response.data);
+
+                    vm.infoMessage = "Your bid response: " + JSON.stringify(response.data);
+
+
+                }, function (error) {
+                    vm.errorMessage = "Unable to try to bid on the item. " + JSON.stringify(error);;
+
+                })
+                .finally(function () {
+                    vm.isBusy = false;
+                });
         }
     }
 

@@ -8,18 +8,23 @@
        
         <wait-cursor display-when="vm.isBusy"></wait-cursor>
         <div class="alert alert-danger" ng-show="vm.errorMessage">{{ vm.errorMessage }}</div>
+        <div class="alert alert-info" ng-show="vm.infoMessage">{{ vm.infoMessage }}</div>
+
+        <button ng-click="vm.tryBid()" class="btn btn-danger pull-left">Try bid</button>
 
         <form novalidate="" name="newBidForm" ng-submit="vm.addBid()">
-            <div>
-                <input type="submit" value="Bid" class="btn btn-success"/>
+            <div class="form-group">
+                <input type="submit" value="Just add bid" class="btn btn-success"/>
             </div>
         </form>
 
-        
+
         <div>
             <!--<h2>Price: {{ vm.currentPrice }}</h2>-->
             <h2>Price: <span ng-bind="vm.currentPrice"></span></h2>
         </div>
+
+        <div class="alert alert-info" ng-show="vm.serverMessage">{{ vm.serverMessage }}</div>
 
         <div>
             <p>All bids from server + my local.</p>

@@ -9,10 +9,11 @@
         var chat = $.connection.communicationHub;
         //$.connection.hub.logging = true;
         
-        chat.client.priceChanged = function () { };
+        chat.client.priceChangedStub = function () { };
 
         $.connection.hub.start().done(function (e) {
-            chat.server.send("info", "connected");
+        //    console.log("Communication server started!");
+            chat.server.send("JS hub start done.");
         });
 
         factory.chat = chat;

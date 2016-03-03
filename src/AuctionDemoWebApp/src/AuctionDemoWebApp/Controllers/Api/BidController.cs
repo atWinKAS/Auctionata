@@ -24,7 +24,7 @@ namespace AuctionDemoWebApp.Controllers.Api
         private ILogger<BidController> logger;
         private IAuctionRepository repository;
         private CalculationService calculationService;
-        private IHubContext commHub;
+//        private IHubContext commHub;
 
         public BidController(IAuctionRepository repository, ILogger<BidController> logger, CalculationService calculationService, IConnectionManager connectionManager)
         {
@@ -32,7 +32,7 @@ namespace AuctionDemoWebApp.Controllers.Api
             this.logger = logger;
             this.calculationService = calculationService;
 
-            this.commHub = connectionManager.GetHubContext<AuctionDemoWebApp.Hub.CommunicationHub>();
+  //          this.commHub = connectionManager.GetHubContext<AuctionDemoWebApp.Hub.CommunicationHub>();
         }
 
         [HttpGet("")]
@@ -113,7 +113,7 @@ namespace AuctionDemoWebApp.Controllers.Api
         {
             this.logger.LogInformation($"Going to notify {UserHandler.ConnectedIds.Count} clients..."); 
 
-            this.commHub.Clients.All.priceChanged(itemName, newValue);
+            //this.commHub.Clients.All.priceChanged(itemName, newValue);
 
         }
     }

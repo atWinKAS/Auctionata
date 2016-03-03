@@ -2,7 +2,7 @@
     "use strict";
     angular.module("app-items").controller("itemsController", itemsController);
 
-    function itemsController($http) {
+    function itemsController($http, notificationService) {
         var vm = this;
 
         vm.errorMessage = "";
