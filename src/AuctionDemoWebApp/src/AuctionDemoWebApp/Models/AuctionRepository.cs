@@ -82,6 +82,9 @@ namespace AuctionDemoWebApp.Models
                 }
             }
 
+            //// for a  now let's say all is ok...
+            canAdd = true;
+
             if (canAdd)
                 {
                     theItem.Bids.Add(newBid);
