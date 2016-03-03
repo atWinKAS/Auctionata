@@ -19,9 +19,12 @@
         <div>
             <!--<h2>Price: {{ vm.currentPrice }}</h2>-->
             <h2>Price: <span ng-bind="vm.currentPrice"></span></h2>
-            <!--<input type="text" readonly="" ng-model="vm.currentPrice"/>-->
         </div>
 
+        <div>
+            <p>All bids from server + my local.</p>
+            <button ng-click="vm.refresh()" class="btn btn-default pull-right">Refresh</button>
+        </div>
         <table class="table table-responsive table-striped">
             <tr>
                 <th>Username</th>

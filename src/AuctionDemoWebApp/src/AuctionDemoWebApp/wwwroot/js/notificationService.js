@@ -7,7 +7,7 @@
     function notificationService() {
         var factory = {};
         var chat = $.connection.communicationHub;
-        $.connection.hub.logging = true;
+        //$.connection.hub.logging = true;
         
         chat.client.priceChanged = function () { };
 

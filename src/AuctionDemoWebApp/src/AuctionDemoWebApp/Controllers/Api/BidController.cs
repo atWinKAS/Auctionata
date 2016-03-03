@@ -69,28 +69,29 @@ namespace AuctionDemoWebApp.Controllers.Api
                     newBid.Created = DateTime.UtcNow;
                     newBid.UserName = User.Identity.Name;
 
+                    this.logger.LogInformation($"Saving bid: { Newtonsoft.Json.JsonConvert.SerializeObject(newBid) }");
 
                     this.repository.AddBid(itemName, newBid);
 
                     if (this.repository.SaveAll())
                     {
-                        var item = this.repository.GetItemByName(itemName);
-                        double currentPrice = 0;
-                        if (item.Bids.Any())
-                        {
-                            var latestBib = item.Bids.OrderByDescending(b => b.Created).FirstOrDefault();
-                            if (latestBib != null)
-                            {
-                                currentPrice = latestBib.Price;
-                            }
-                        }
+                        //var item = this.repository.GetItemByName(itemName);
+                        //double currentPrice = 0;
+                        //if (item.Bids.Any())
+                        //{
+                        //    var latestBib = item.Bids.OrderByDescending(b => b.Created).FirstOrDefault();
+                        //    if (latestBib != null)
+                        //    {
+                        //        currentPrice = latestBib.Price;
+                        //    }
+                        //}
 
-                        var calcResult = this.calculationService.Calculate(currentPrice);
-                        if (calcResult.Success)
-                        {
-                            this.NotifyOthers(item.Name, calcResult.NewPrice);
-                            this.Log($"Current new price is {calcResult.NewPrice}");
-                        }
+                        //var calcResult = this.calculationService.Calculate(currentPrice);
+                        //if (calcResult.Success)
+                        //{
+                        //    this.NotifyOthers(item.Name, calcResult.NewPrice);
+                        //    this.Log($"Current new price is {calcResult.NewPrice}");
+                        //}
 
                         Response.StatusCode = (int) HttpStatusCode.Created;
                         return Json(Mapper.Map<BidViewModel>(newBid));
@@ -110,15 +111,10 @@ namespace AuctionDemoWebApp.Controllers.Api
 
         private void NotifyOthers(string itemName, double newValue)
         {
-            this.Log($"Going to notify {UserHandler.ConnectedIds.Count} clients..."); 
+            this.logger.LogInformation($"Going to notify {UserHandler.ConnectedIds.Count} clients..."); 
 
             this.commHub.Clients.All.priceChanged(itemName, newValue);
 
-        }
-
-        private void Log(string  message)
-        {
-            System.Diagnostics.Debug.WriteLine(message);
         }
     }
 }

@@ -29,7 +29,7 @@
                     vm.items.push(response.data);
                     vm.newItem = {};
                 }, function(error) {
-                    vm.errorMessage = "Unable to create new item " + error; 
+                    vm.errorMessage = "Unable to create new item " + JSON.stringify(error);;
                 })
                 .finally(function() {
                     vm.isBusy = false;
@@ -41,7 +41,7 @@
             .then(function(response) {
                 angular.copy(response.data, vm.items);
             }, function(error) {
-                vm.errorMessage = "Unable to get items from server." + error;
+                vm.errorMessage = "Unable to get items from server." + JSON.stringify(error);;
             })
         .finally(function () {
                 vm.isBusy = false;

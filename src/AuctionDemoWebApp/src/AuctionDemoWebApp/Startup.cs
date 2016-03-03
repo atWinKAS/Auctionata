@@ -101,7 +101,7 @@ namespace AuctionDemoWebApp
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, AuctionContextSeedData seeder, ILoggerFactory loggerFactory)
         {
             //// change log level in production
-            loggerFactory.AddDebug(LogLevel.Warning);
+            loggerFactory.AddDebug(LogLevel.Information);
 
             app.UseSignalR();
 

@@ -4,5 +4,6 @@
   },
   "Data": {
     "AuctionContextConnection": "Server=tcp:audemodb.database.windows.net,1433;Database=audb;User ID=su@audemodb;Password=POIq1w2e3r4;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    //"AuctionContextConnection": "Data Source=WINKAS-ANDRII\\SQLEXPRESS;Initial Catalog=AuctionDb;Persist Security Info=True;User ID=sa;Password=saroot;MultipleActiveResultSets=True"
   }
 }
