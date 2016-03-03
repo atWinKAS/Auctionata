@@ -2,17 +2,18 @@
     "use strict";
     angular.module("app-items").controller("itemEditorController", itemEditorController);
 
-    function itemEditorController($routeParams, $http, $scope) {
+    function itemEditorController($routeParams, $http, $scope, notificationService) {
         var vm = this;
 
         vm.errorMessage = "";
         vm.isBusy = true;
 
-        
+
         vm.itemName = $routeParams.itemName;
         vm.bids = [];
 
         vm.newBid = {};
+        vm.currentPrice = 0;
 
         var url = "/api/items/" + vm.itemName + "/bids";
 
@@ -22,7 +23,7 @@
             vm.newBid.price = vm.currentPrice;
 
             $http.post(url, vm.newBid)
-                .then(function(response) {
+                .then(function (response) {
                     vm.bids.push(response.data);
                     vm.newBid = {};
 
@@ -33,23 +34,23 @@
                     vm.errorMessage = "Unable to add new details. " + error;
 
                 })
-                .finally(function() {
+                .finally(function () {
                     vm.isBusy = false;
                 });
 
         }
 
         $http.get(url)
-            .then(function(response) {
+            .then(function (response) {
                 angular.copy(response.data, vm.bids);
                 vm.currentPrice = 0;
 
                 updateCurrentItem();
 
-            }, function() {
+            }, function () {
                 vm.errorMessage = "Failed to load details";
             })
-            .finally(function() {
+            .finally(function () {
                 vm.isBusy = false;
             });
 
@@ -63,28 +64,22 @@
                 });
         }
 
-        var chat = $.connection.communicationHub;
-        
-        chat.client.priceChanged = function (updItemName, newPrice) {
+        notificationService.chat.client.priceChanged = function (updItemName, newPrice) {
             if (updItemName == vm.itemName) {
                 vm.currentPrice = newPrice;
                 $scope.$apply();
 
                 $http.get(url)
-                    .then(function(response) {
+                    .then(function (response) {
                         angular.copy(response.data, vm.bids);
-                    }, function(error) {
-                        
+                    }, function (error) {
+
                     });
 
             }
         }
-
-        $.connection.hub.start().done(function () {
-        });
-
     }
 
-    
 
-})();       
+
+})();

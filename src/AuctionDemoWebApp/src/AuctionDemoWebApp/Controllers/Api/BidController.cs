@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using AuctionDemoWebApp.Hub;
 using AuctionDemoWebApp.Models;
 using AuctionDemoWebApp.Services;
 using AuctionDemoWebApp.ViewModels;
@@ -108,9 +109,15 @@ namespace AuctionDemoWebApp.Controllers.Api
 
         private void NotifyOthers(string itemName, double newValue)
         {
+            this.Log($"Going to notify {UserHandler.ConnectedIds.Count} clients..."); 
+
             this.commHub.Clients.All.priceChanged(itemName, newValue);
 
         }
 
+        private void Log(string  message)
+        {
+            System.Diagnostics.Debug.WriteLine(message);
+        }
     }
 }
