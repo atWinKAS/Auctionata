@@ -70,11 +70,7 @@ namespace AuctionDemoWebApp.Controllers.Api
                     newBid.UserName = User.Identity.Name;
 
 
-                    if (!this.repository.AddBid(itemName, newBid))
-                    {
-                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        return Json("Bid has not been added.");
-                    }
+                    this.repository.AddBid(itemName, newBid);
 
                     if (this.repository.SaveAll())
                     {
