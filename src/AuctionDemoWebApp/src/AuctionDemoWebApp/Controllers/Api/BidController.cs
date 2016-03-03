@@ -75,24 +75,6 @@ namespace AuctionDemoWebApp.Controllers.Api
 
                     if (this.repository.SaveAll())
                     {
-                        //var item = this.repository.GetItemByName(itemName);
-                        //double currentPrice = 0;
-                        //if (item.Bids.Any())
-                        //{
-                        //    var latestBib = item.Bids.OrderByDescending(b => b.Created).FirstOrDefault();
-                        //    if (latestBib != null)
-                        //    {
-                        //        currentPrice = latestBib.Price;
-                        //    }
-                        //}
-
-                        //var calcResult = this.calculationService.Calculate(currentPrice);
-                        //if (calcResult.Success)
-                        //{
-                        //    this.NotifyOthers(item.Name, calcResult.NewPrice);
-                        //    this.Log($"Current new price is {calcResult.NewPrice}");
-                        //}
-
                         Response.StatusCode = (int) HttpStatusCode.Created;
                         return Json(Mapper.Map<BidViewModel>(newBid));
                     }
@@ -106,6 +88,33 @@ namespace AuctionDemoWebApp.Controllers.Api
                 this.logger.LogError("Failed to save details", ex);
                 Response.StatusCode = (int) HttpStatusCode.BadRequest;
                 return Json("Failed to save details");
+            }
+        }
+        
+        [HttpDelete("")]
+        public JsonResult Clear(string itemName)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    this.repository.ClearBids(itemName);
+
+                    if (this.repository.SaveAll())
+                    {
+                        Response.StatusCode = (int) HttpStatusCode.OK;
+                        return Json($"All bids of {itemName} have been deleted");
+                    }
+                }
+
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json(new {Message = "Validation errors while deleting details. Errors: " , ModelState = ModelState });
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError("Failed to delete details", ex);
+                Response.StatusCode = (int) HttpStatusCode.BadRequest;
+                return Json("Failed to delete details");
             }
         }
 

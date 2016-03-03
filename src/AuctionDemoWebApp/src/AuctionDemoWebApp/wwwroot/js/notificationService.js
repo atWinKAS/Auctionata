@@ -12,7 +12,7 @@
         chat.client.priceChangedStub = function () { };
 
         $.connection.hub.start().done(function (e) {
-        //    console.log("Communication server started!");
+            console.log("Communication server started!");
             chat.server.send("JS hub start done.");
         });
 

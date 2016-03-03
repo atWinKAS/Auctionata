@@ -45,6 +45,7 @@
         }
 
         function getBids() {
+            vm.isBusy = true;
             $http.get(url)
             .then(function (response) {
                 angular.copy(response.data, vm.bids);
@@ -65,6 +66,7 @@
 
         
         vm.refresh = function() {
+            vm.errorMessage = "";
             getBids();
         }
 
@@ -106,6 +108,23 @@
                 .finally(function () {
                     vm.isBusy = false;
                 });
+        }
+        
+        vm.clear = function() {
+            vm.isBusy = true;
+            $http.delete(url)
+            .then(function (response) {
+                vm.bids = [];
+                vm.currentPrice = 0;
+
+                updateCurrentItem();
+
+            }, function (error) {
+                vm.errorMessage = "Failed to delete all bids. " +  JSON.stringify(error);
+            })
+            .finally(function () {
+                vm.isBusy = false;
+            });
         }
     }
 

@@ -65,35 +65,15 @@ namespace AuctionDemoWebApp.Models
 
         public bool AddBid(string itemName, Bid newBid)
         {
-            //// it should not be possible to add new bid if price in bid is less then max price.
-            bool canAdd = false;
             var theItem = this.GetItemByName(itemName);
-
-            if (!theItem.Bids.Any())
+            if(theItem != null)
             {
-                canAdd = true;
+                theItem.Bids.Add(newBid);
+                this.context.Bids.Add(newBid);
+                return true;
             }
-            else
-            {
-                double currMax = theItem.Bids.OrderByDescending(b => b.Price).FirstOrDefault().Price;
-                if (newBid.Price >= currMax)
-                {
-                    canAdd = true;
-                }
-            }
-
-            //// for a  now let's say all is ok...
-            canAdd = true;
-
-            if (canAdd)
-                {
-                    theItem.Bids.Add(newBid);
-
-                    this.context.Bids.Add(newBid);
-                    return true;
-                }
-            return false;
             
+            return false;
         }
 
         public IEnumerable<Item> GetItemsWithBids()
@@ -107,6 +87,22 @@ namespace AuctionDemoWebApp.Models
                 this.logger.LogError("Unable to get items with bids", ex);
                 return null;
             }
+        }
+        
+        public bool ClearBids(string itemName)
+        {
+            var item = this.context.Items.Include(i => i.Bids).FirstOrDefault(i => i.Name.Equals(itemName));
+            if (item != null && item.Bids != null && item.Bids.Any())
+            {
+                foreach(var bid in item.Bids)
+                {
+                    this.context.Bids.Remove(bid);
+                }
+                
+                return true;
+            }
+            
+            return false;
         }
     }
 }
