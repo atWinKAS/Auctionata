@@ -8,11 +8,11 @@
         var factory = {};
         var chat = $.connection.communicationHub;
         $.connection.hub.logging = true;
-
-        chat.client.foo = function () { };
+        
+        chat.client.priceChanged = function () { };
 
         $.connection.hub.start().done(function (e) {
-            chat.server.send("info", "client connected to hub id: " + $.connection.hub.id);
+            chat.server.send("info", "connected");
         });
 
         factory.chat = chat;

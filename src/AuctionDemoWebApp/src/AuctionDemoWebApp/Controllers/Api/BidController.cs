@@ -70,7 +70,12 @@ namespace AuctionDemoWebApp.Controllers.Api
                     newBid.UserName = User.Identity.Name;
 
 
-                    this.repository.AddBid(itemName, newBid);
+                    if (!this.repository.AddBid(itemName, newBid))
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        return Json("Bid has not been added.");
+                    }
+
                     if (this.repository.SaveAll())
                     {
                         var item = this.repository.GetItemByName(itemName);
@@ -88,7 +93,7 @@ namespace AuctionDemoWebApp.Controllers.Api
                         if (calcResult.Success)
                         {
                             this.NotifyOthers(item.Name, calcResult.NewPrice);
-                            
+                            this.Log($"Current new price is {calcResult.NewPrice}");
                         }
 
                         Response.StatusCode = (int) HttpStatusCode.Created;

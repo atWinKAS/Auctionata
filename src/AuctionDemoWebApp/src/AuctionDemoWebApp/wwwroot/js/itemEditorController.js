@@ -19,12 +19,13 @@
 
         vm.addBid = function () {
             vm.isBusy = true;
+            vm.errorMessage = "";
 
             vm.newBid.price = vm.currentPrice;
 
             $http.post(url, vm.newBid)
                 .then(function (response) {
-                    vm.bids.push(response.data);
+                    //vm.bids.push(response.data);
                     vm.newBid = {};
 
                     updateCurrentItem();
@@ -60,11 +61,12 @@
                     vm.currentItem = response.data;
                     vm.currentPrice = response.data.currentPrice;
                 }, function (error) {
-
+                    vm.errorMessage = "Error while getting item status.";
                 });
         }
 
         notificationService.chat.client.priceChanged = function (updItemName, newPrice) {
+            console.log("priceChanged event handled.");
             if (updItemName == vm.itemName) {
                 vm.currentPrice = newPrice;
                 $scope.$apply();
@@ -73,7 +75,7 @@
                     .then(function (response) {
                         angular.copy(response.data, vm.bids);
                     }, function (error) {
-
+                        vm.errorMessage = "Error while getting item status.";
                     });
 
             }

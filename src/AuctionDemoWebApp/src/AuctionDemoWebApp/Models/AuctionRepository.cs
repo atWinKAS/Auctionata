@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Server.Kestrel.Networking;
 using Microsoft.Data.Entity;
@@ -62,13 +63,34 @@ namespace AuctionDemoWebApp.Models
                 .FirstOrDefault(t => t.Name.Equals(itemName, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public void AddBid(string itemName, Bid newBid)
+        public bool AddBid(string itemName, Bid newBid)
         {
+            //// it should not be possible to add new bid if price in bid is less then max price.
+            bool canAdd = false;
             var theItem = this.GetItemByName(itemName);
-            
-            theItem.Bids.Add(newBid);
 
-            this.context.Bids.Add(newBid);
+            if (!theItem.Bids.Any())
+            {
+                canAdd = true;
+            }
+            else
+            {
+                double currMax = theItem.Bids.OrderByDescending(b => b.Price).FirstOrDefault().Price;
+                if (newBid.Price >= currMax)
+                {
+                    canAdd = true;
+                }
+            }
+
+            if (canAdd)
+                {
+                    theItem.Bids.Add(newBid);
+
+                    this.context.Bids.Add(newBid);
+                    return true;
+                }
+            return false;
+            
         }
 
         public IEnumerable<Item> GetItemsWithBids()
