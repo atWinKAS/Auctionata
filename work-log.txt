@@ -1,3 +1,5 @@
+2016-03-03
+Created new routine for trying to bid on item. 4h
 
 2016-03-02 
 Updating Bidding routine 2h
